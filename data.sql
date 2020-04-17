@@ -1,0 +1,27 @@
+DROP DATABASE IF EXISTS ems_DB;
+
+CREATE DATABASE ems_DB;
+
+USE ems_DB;
+
+CREATE TABLE department (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE role (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title VARCHAR(30) NOT NULL,
+    salary DECIMAL(10,4) NOT NULL,
+    department_id INTEGER NOT NULL
+);
+
+CREATE TABLE employee (
+    id INTEGER NOT NULL PRIMARY KEY,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INTEGER NOT NULL,
+    manager_id INTEGER
+);
+
+
