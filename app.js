@@ -51,15 +51,15 @@ function addRoles(id, title, salary, department){
     })
 }
 
-viewEmployees()
 
 function viewEmployees() {
-    connection.query(`SELECT employee.id as employeeID, first_name, last_name, role.title, role.salary, department.name as department 
+    connection.query(`SELECT employee.id as employeeID, manager_ID, first_name, last_name, role.title, role.salary, department.name as department 
     FROM employee
     LEFT JOIN role on employee.role_ID = role.id
     LEFT JOIN department on role.department_ID = department.id`, function (err, res) {
         if (err) throw err;
         var parsedRes = res.map(element => { return { id: element.employeeID, name: element.first_name +" "+element.last_name, title: element.title, salary: element.salary, department: element.department } });
+        
         return parsedRes.forEach(element => console.log(element.id + " | " + element.name + " | " + element.title+ " | " + element.salary+ " | " + element.department))
     })
 }
@@ -69,4 +69,10 @@ function addEmployees(id, first,last,role_id,mgr_id){
     connection.query(`INSERT INTO employee(id,first_name,last_name, role_id, manager_id) VALUES (${id}, "${first}", "${last}",${role_id}, ${mgr_id})`, function (err){
         console.log("Success! - You added a new employee")
     })
+}
+
+
+function updateRole(ee_id,role_id){
+    connection.query(`UPDATE employee SET role_ID = ${role_id} WHERE id=${ee_id}`)
+    viewEmployees()
 }
