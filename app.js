@@ -39,7 +39,6 @@ function addDepartment(id, newDept) {
 function viewRoles() {
     connection.query("SELECT role.id as role_id, title, salary, department_ID, department.name FROM role LEFT JOIN department on role.department_ID = department.id", function (err, res) {
         if (err) throw err;
-        console.log(res)
         var parsedRes = res.map(element => { return { id: element.role_id, title: element.title, salary: element.salary, department: element.name } });
         return parsedRes.forEach(element => console.log(element.id + " | " + element.title+ " | " + element.salary+ " | " + element.department))
     })
@@ -49,5 +48,25 @@ function addRoles(id, title, salary, department){
     connection.query(`INSERT INTO role(id,title,salary, department_id) VALUES (${id}, "${title}", ${salary}, ${department})`, function (err){
         console.log("Success! - You added a new role")
         viewRoles() 
+    })
+}
+
+viewEmployees()
+
+function viewEmployees() {
+    connection.query(`SELECT employee.id as employeeID, first_name, last_name, role.title, role.salary, department.name as department 
+    FROM employee
+    LEFT JOIN role on employee.role_ID = role.id
+    LEFT JOIN department on role.department_ID = department.id`, function (err, res) {
+        if (err) throw err;
+        var parsedRes = res.map(element => { return { id: element.employeeID, name: element.first_name +" "+element.last_name, title: element.title, salary: element.salary, department: element.department } });
+        return parsedRes.forEach(element => console.log(element.id + " | " + element.name + " | " + element.title+ " | " + element.salary+ " | " + element.department))
+    })
+}
+
+
+function addEmployees(id, first,last,role_id,mgr_id){
+    connection.query(`INSERT INTO employee(id,first_name,last_name, role_id, manager_id) VALUES (${id}, "${first}", "${last}",${role_id}, ${mgr_id})`, function (err){
+        console.log("Success! - You added a new employee")
     })
 }
