@@ -14,9 +14,41 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw err;
     console.log("Connected as ID " + connection.threadId + "\n");
-    viewEmployees();
+    inquirer.prompt({
+        type: "list",
+        message: "What would you like to do?",
+        name: "option",
+        choices: ["View Roles", "View Employees", "View Departments", "Add Roles", "Add Employees", "Add Departments"]
+        
+    }).then(function(res){
+        switch(res.option){
+            case("View Roles"):
+                viewRoles();
+                break;
+            case("View Employees"):
+                viewEmployees();
+                break;
+            case("View Departments"):
+                viewDepartments();
+                break;
+            case("Add Roles"):
+                addRoles();
+                break;
+            case("Add Employees"):
+                addEmployees();
+                break;
+            case("Add Departments"):
+                addDepartment();
+                break;
+            default:
+                console.log("You picked default")
+        }
+        
+    })
 
 });
+
+
 
 
 function viewDepartments() {
@@ -26,10 +58,6 @@ function viewDepartments() {
         console.log(parsedRes)
     })
 }
-
-console.log(viewDepartments())
-
-
 
 
 function addDepartment(id, newDept) {
