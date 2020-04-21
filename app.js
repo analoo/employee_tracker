@@ -2,6 +2,8 @@ var mysql = require("mysql")
 var inquirer = require("inquirer")
 var cTable = require('console.table');
 
+
+//first we make a connection to the sql database
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -17,6 +19,7 @@ connection.connect(function (err) {
 
 });
 
+// prompt user allows for userto provide what they want to do next
 function promptUser(){
     return inquirer.prompt({
         type: "list",
