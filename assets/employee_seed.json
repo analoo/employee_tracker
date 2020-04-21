@@ -1,0 +1,37 @@
+[
+	{
+		"id" : 1,
+		"first_name" : "Ana",
+		"last_name" : "Medrano",
+		"role_id" : 1,
+		"manager_id" : 1
+	},
+	{
+		"id" : 2,
+		"first_name" : "Mark",
+		"last_name" : "Zucchini",
+		"role_id" : 3,
+		"manager_id" : 1
+	},
+	{
+		"id" : 3,
+		"first_name" : "Cori",
+		"last_name" : "Anders",
+		"role_id" : 4,
+		"manager_id" : 2
+	},
+	{
+		"id" : 4,
+		"first_name" : "Courtney",
+		"last_name" : "Canned",
+		"role_id" : 5,
+		"manager_id" : 2
+	},
+	{
+		"id" : 5,
+		"first_name" : "Tony",
+		"last_name" : "Stark",
+		"role_id" : 3,
+		"manager_id" : 1
+	}
+]
